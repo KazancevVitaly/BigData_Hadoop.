@@ -1,0 +1,736 @@
+Script started on 2021-12-09 21:33:38+08:00 [TERM="xterm-256color" TTY="/dev/pts/0" COLUMNS="80" LINES="24"]
+]0;vitaly@vitaly-MS-7C37: ~[01;32mvitaly@vitaly-MS-7C37[00m:[01;34m~[00m$ [0;33m[0;37mcd Документы/GB/docker-hadoop-master/
+]0;vitaly@vitaly-MS-7C37: ~/Документы/GB/docker-hadoop-master[01;32mvitaly@vitaly-MS-7C37[00m:[01;34m~/Документы/GB/docker-hadoop-master[00m$ [0;33m[0;37mdocker-compose up -d
+Starting datanode ... 
+Starting namenode ... 
+Starting nodemanager ... 
+Starting historyserver ... 
+Starting resourcemanager ... 
+[5A[2KStarting datanode        ... [32mdone[0m[5B[3A[2KStarting nodemanager     ... [32mdone[0m[3B[4A[2KStarting namenode        ... [32mdone[0m[4B[1A[2KStarting resourcemanager ... [32mdone[0m[1B[2A[2KStarting historyserver   ... [32mdone[0m[2B]0;vitaly@vitaly-MS-7C37: ~/Документы/GB/docker-hadoop-master[01;32mvitaly@vitaly-MS-7C37[00m:[01;34m~/Документы/GB/docker-hadoop-master[00m$ [0;33m[0;37mdocker exec -it namenode bash
+root@f560c11b9fde:/# [Kroot@f560c11b9fde:/# ls /
+KEYS  dev	     hadoop	  lib	 mnt   root    sbin  tmp
+bin   entrypoint.sh  hadoop-data  lib64  opt   run     srv   usr
+boot  etc	     home	  media  proc  run.sh  sys   var
+root@f560c11b9fde:/# hdfs dfs -ls/  /
+Found 1 items
+drwxr-xr-x   - root supergroup          0 2021-12-03 04:52 /rmstate
+root@f560c11b9fde:/# script -a log.txt
+Script started, file is log.txt
+# ls /
+KEYS  dev	     hadoop	  lib	   media  proc	run.sh	sys  var
+bin   entrypoint.sh  hadoop-data  lib64    mnt	  root	sbin	tmp
+boot  etc	     home	  log.txt  opt	  run	srv	usr
+# hdfs dfs -mkdir -p /user/$USER
+# hdfs dfs -sl  ls
+# ^[[A^[[A^[[B^[[B^[[B                    ^[[A^[[B        echo "Hello," > test_file_1^C
+# ^[[A^[[A^[[B^[[B                ls
+KEYS  dev	     hadoop	  lib	   media  proc	run.sh	sys  var
+bin   entrypoint.sh  hadoop-data  lib64    mnt	  root	sbin	tmp
+boot  etc	     home	  log.txt  opt	  run	srv	usr
+# acho    echo "Hello," > test_file_1.txt
+# echo "hdfs" > test_file_2.txt
+# echi o "!" > test_file_3.txt
+# ls
+KEYS  entrypoint.sh  home     media  root    srv	      test_file_3.txt
+bin   etc	     lib      mnt    run     sys	      tmp
+boot  hadoop	     lib64    opt    run.sh  test_file_1.txt  usr
+dev   hadoop-data    log.txt  proc   sbin    test_file_2.txt  var
+# cat t	est	_file_1.txt
+Hello,
+# ^[[A^[[B        hdfs dfs -mkdir task_2
+# hs dfs dfs -ls
+Found 1 items
+drwxr-xr-x   - root supergroup          0 2021-12-09 14:03 task_2
+# рва    hdfs dfs -put / test_file_* t	   ask_2
+sh: 12: рhdfs: not found
+# hdfs dfs -put test_fele_* task_2
+put: `test_fele_*': No such file or directory
+# ^[[A    hdfs dfs -put test_file_* task_2
+2021-12-09 14:25:07,093 INFO sasl.SaslDataTransferClient: SASL encryption trust check: localHostTrusted = false, remoteHostTrusted = false
+2021-12-09 14:25:07,171 INFO sasl.SaslDataTransferClient: SASL encryption trust check: localHostTrusted = false, remoteHostTrusted = false
+2021-12-09 14:25:07,187 INFO sasl.SaslDataTransferClient: SASL encryption trust check: localHostTrusted = false, remoteHostTrusted = false
+# hdfs dfs -du task_2
+7  21  task_2/test_file_1.txt
+5  15  task_2/test_file_2.txt
+2  6   task_2/test_file_3.txt
+# hdfs dfs -ls -h task_2
+Found 3 items
+-rw-r--r--   3 root supergroup          7 2021-12-09 14:25 task_2/test_file_1.txt
+-rw-r--r--   3 root supergroup          5 2021-12-09 14:25 task_2/test_file_2.txt
+-rw-r--r--   3 root supergroup          2 2021-12-09 14:25 task_2/test_file_3.txt
+# ls -h /ect/hadoop/hdfs-site.xml
+ls: cannot access '/ect/hadoop/hdfs-site.xml': No such file or directory
+# ^[[A^[[B        ls    ls
+KEYS  entrypoint.sh  home     media  root    srv	      test_file_3.txt
+bin   etc	     lib      mnt    run     sys	      tmp
+boot  hadoop	     lib64    opt    run.sh  test_file_1.txt  usr
+dev   hadoop-data    log.txt  proc   sbin    test_file_2.txt  var
+# ls -    vi  ls -lh /etc/hadoop/hdfs-site.xml
+-rw-r--r-- 1 1001 1001 5.9K Dec  9 13:34 /etc/hadoop/hdfs-site.xml
+# vim /etc/hadoop/hdfs-site.xml
+sh: 20: vim: not found
+# hdfs dfs -setrep -c   w 2 task_2/TES   test_file_*
+Replication 2 set: task_2/test_file_1.txt
+Replication 2 set: task_2/test_file_2.txt
+Replication 2 set: task_2/test_file_3.txt
+Waiting for task_2/test_file_1.txt .............................................................................
+
+^C^C# 
+# hdfs dfs -ls -h task_2
+Found 3 items
+-rw-r--r--   2 root supergroup          7 2021-12-09 14:25 task_2/test_file_1.txt
+-rw-r--r--   2 root supergroup          5 2021-12-09 14:25 task_2/test_file_2.txt
+-rw-r--r--   2 root supergroup          2 2021-12-09 14:25 task_2/test_file_3.txt
+# apt install vim
+Reading package lists... 0%Reading package lists... 0%Reading package lists... 35%Reading package lists... Done
+Building dependency tree... 0%Building dependency tree... 0%Building dependency tree... 50%Building dependency tree... 50%Building dependency tree       
+Reading state information... 0%Reading state information... 0%Reading state information... Done
+E: Unable to locate package vim
+# ls
+KEYS  entrypoint.sh  home     media  root    srv	      test_file_3.txt
+bin   etc	     lib      mnt    run     sys	      tmp
+boot  hadoop	     lib64    opt    run.sh  test_file_1.txt  usr
+dev   hadoop-data    log.txt  proc   sbin    test_file_2.txt  var
+#   vim my_script.sh
+sh: 26: vim: not found
+# sudo apt install vim
+sh: 27: sudo: not found
+# apt install vi
+Reading package lists... 0%Reading package lists... 0%Reading package lists... 35%Reading package lists... Done
+Building dependency tree... 0%Building dependency tree... 0%Building dependency tree... 50%Building dependency tree... 50%Building dependency tree       
+Reading state information... 0%Reading state information... 0%Reading state information... Done
+E: Unable to locate package vi
+# hdfs dfs -rm -r -skipTrash task_2
+Deleted task_2
+# rm test_file_*
+# ls
+KEYS  dev	     hadoop	  lib	   media  proc	run.sh	sys  var
+bin   entrypoint.sh  hadoop-data  lib64    mnt	  root	sbin	tmp
+boot  etc	     home	  log.txt  opt	  run	srv	usr
+# cat log.txt
+Script started on Thu Dec  9 13:48:40 2021
+# ls /
+KEYS  dev	     hadoop	  lib	   media  proc	run.sh	sys  var
+bin   entrypoint.sh  hadoop-data  lib64    mnt	  root	sbin	tmp
+boot  etc	     home	  log.txt  opt	  run	srv	usr
+# hdfs dfs -mkdir -p /user/$USER
+# hdfs dfs -sl  ls
+# ^[[A^[[A^[[B^[[B^[[B                    ^[[A^[[B        echo "Hello," > test_file_1^C
+# ^[[A^[[A^[[B^[[B                ls
+KEYS  dev	     hadoop	  lib	   media  proc	run.sh	sys  var
+bin   entrypoint.sh  hadoop-data  lib64    mnt	  root	sbin	tmp
+boot  etc	     home	  log.txt  opt	  run	srv	usr
+# acho    echo "Hello," > test_file_1.txt
+# echo "hdfs" > test_file_2.txt
+# echi o "!" > test_file_3.txt
+# ls
+KEYS  entrypoint.sh  home     media  root    srv	      test_file_3.txt
+bin   etc	     lib      mnt    run     sys	      tmp
+boot  hadoop	     lib64    opt    run.sh  test_file_1.txt  usr
+dev   hadoop-data    log.txt  proc   sbin    test_file_2.txt  var
+# cat t	est	_file_1.txt
+Hello,
+# ^[[A^[[B        hdfs dfs -mkdir task_2
+# hs dfs dfs -ls
+Found 1 items
+drwxr-xr-x   - root supergroup          0 2021-12-09 14:03 task_2
+# рва    hdfs dfs -put / test_file_* t	   ask_2
+sh: 12: рhdfs: not found
+# hdfs dfs -put test_fele_* task_2
+put: `test_fele_*': No such file or directory
+# ^[[A    hdfs dfs -put test_file_* task_2
+2021-12-09 14:25:07,093 INFO sasl.SaslDataTransferClient: SASL encryption trust check: localHostTrusted = false, remoteHostTrusted = false
+2021-12-09 14:25:07,171 INFO sasl.SaslDataTransferClient: SASL encryption trust check: localHostTrusted = false, remoteHostTrusted = false
+2021-12-09 14:25:07,187 INFO sasl.SaslDataTransferClient: SASL encryption trust check: localHostTrusted = false, remoteHostTrusted = false
+# hdfs dfs -du task_2
+7  21  task_2/test_file_1.txt
+5  15  task_2/test_file_2.txt
+2  6   task_2/test_file_3.txt
+# hdfs dfs -ls -h task_2
+Found 3 items
+-rw-r--r--   3 root supergroup          7 2021-12-09 14:25 task_2/test_file_1.txt
+-rw-r--r--   3 root supergroup          5 2021-12-09 14:25 task_2/test_file_2.txt
+-rw-r--r--   3 root supergroup          2 2021-12-09 14:25 task_2/test_file_3.txt
+# ls -h /ect/hadoop/hdfs-site.xml
+ls: cannot access '/ect/hadoop/hdfs-site.xml': No such file or directory
+# ^[[A^[[B        ls    ls
+KEYS  entrypoint.sh  home     media  root    srv	      test_file_3.txt
+bin   etc	     lib      mnt    run     sys	      tmp
+boot  hadoop	     lib64    opt    run.sh  test_file_1.txt  usr
+dev   hadoop-data    log.txt  proc   sbin    test_file_2.txt  var
+# ls -    vi  ls -lh /etc/hadoop/hdfs-site.xml
+-rw-r--r-- 1 1001 1001 5.9K Dec  9 13:34 /etc/hadoop/hdfs-site.xml
+# vim /etc/hadoop/hdfs-site.xml
+sh: 20: vim: not found
+# hdfs dfs -setrep -c   w 2 task_2/TES   test_file_*
+Replication 2 set: task_2/test_file_1.txt
+Replication 2 set: task_2/test_file_2.txt
+Replication 2 set: task_2/test_file_3.txt
+Waiting for task_2/test_file_1.txt .............................................................................
+
+^C^C# 
+# hdfs dfs -ls -h task_2
+Found 3 items
+-rw-r--r--   2 root supergroup          7 2021-12-09 14:25 task_2/test_file_1.txt
+-rw-r--r--   2 root supergroup          5 2021-12-09 14:25 task_2/test_file_2.txt
+-rw-r--r--   2 root supergroup          2 2021-12-09 14:25 task_2/test_file_3.txt
+# apt install vim
+Reading package lists... 0%Reading package lists... 0%Reading package lists... 35%Reading package lists... Done
+Building dependency tree... 0%Building dependency tree... 0%Building dependency tree... 50%Building dependency tree... 50%Building dependency tree       
+Reading state information... 0%Reading state information... 0%Reading state information... Done
+E: Unable to locate package vim
+# ls
+KEYS  entrypoint.sh  home     media  root    srv	      test_file_3.txt
+bin   etc	     lib      mnt    run     sys	      tmp
+boot # exit
+Script done, file is log.txt
+root@f560c11b9fde:/# ls
+KEYS  dev	     hadoop	  lib	   media  proc	run.sh	sys  var
+bin   entrypoint.sh  hadoop-data  lib64    mnt	  root	sbin	tmp
+boot  etc	     home	  log.txt  opt	  run	srv	usr
+root@f560c11b9fde:/# cat log.txt 
+Script started on Thu Dec  9 13:48:40 2021
+# ls /
+KEYS  dev	     hadoop	  lib	   media  proc	run.sh	sys  var
+bin   entrypoint.sh  hadoop-data  lib64    mnt	  root	sbin	tmp
+boot  etc	     home	  log.txt  opt	  run	srv	usr
+# hdfs dfs -mkdir -p /user/$USER
+# hdfs dfs -sl  ls
+# ^[[A^[[A^[[B^[[B^[[B                    ^[[A^[[B        echo "Hello," > test_file_1^C
+# ^[[A^[[A^[[B^[[B                ls
+KEYS  dev	     hadoop	  lib	   media  proc	run.sh	sys  var
+bin   entrypoint.sh  hadoop-data  lib64    mnt	  root	sbin	tmp
+boot  etc	     home	  log.txt  opt	  run	srv	usr
+# acho    echo "Hello," > test_file_1.txt
+# echo "hdfs" > test_file_2.txt
+# echi o "!" > test_file_3.txt
+# ls
+KEYS  entrypoint.sh  home     media  root    srv	      test_file_3.txt
+bin   etc	     lib      mnt    run     sys	      tmp
+boot  hadoop	     lib64    opt    run.sh  test_file_1.txt  usr
+dev   hadoop-data    log.txt  proc   sbin    test_file_2.txt  var
+# cat t	est	_file_1.txt
+Hello,
+# ^[[A^[[B        hdfs dfs -mkdir task_2
+# hs dfs dfs -ls
+Found 1 items
+drwxr-xr-x   - root supergroup          0 2021-12-09 14:03 task_2
+# рва    hdfs dfs -put / test_file_* t	   ask_2
+sh: 12: рhdfs: not found
+# hdfs dfs -put test_fele_* task_2
+put: `test_fele_*': No such file or directory
+# ^[[A    hdfs dfs -put test_file_* task_2
+2021-12-09 14:25:07,093 INFO sasl.SaslDataTransferClient: SASL encryption trust check: localHostTrusted = false, remoteHostTrusted = false
+2021-12-09 14:25:07,171 INFO sasl.SaslDataTransferClient: SASL encryption trust check: localHostTrusted = false, remoteHostTrusted = false
+2021-12-09 14:25:07,187 INFO sasl.SaslDataTransferClient: SASL encryption trust check: localHostTrusted = false, remoteHostTrusted = false
+# hdfs dfs -du task_2
+7  21  task_2/test_file_1.txt
+5  15  task_2/test_file_2.txt
+2  6   task_2/test_file_3.txt
+# hdfs dfs -ls -h task_2
+Found 3 items
+-rw-r--r--   3 root supergroup          7 2021-12-09 14:25 task_2/test_file_1.txt
+-rw-r--r--   3 root supergroup          5 2021-12-09 14:25 task_2/test_file_2.txt
+-rw-r--r--   3 root supergroup          2 2021-12-09 14:25 task_2/test_file_3.txt
+# ls -h /ect/hadoop/hdfs-site.xml
+ls: cannot access '/ect/hadoop/hdfs-site.xml': No such file or directory
+# ^[[A^[[B        ls    ls
+KEYS  entrypoint.sh  home     media  root    srv	      test_file_3.txt
+bin   etc	     lib      mnt    run     sys	      tmp
+boot  hadoop	     lib64    opt    run.sh  test_file_1.txt  usr
+dev   hadoop-data    log.txt  proc   sbin    test_file_2.txt  var
+# ls -    vi  ls -lh /etc/hadoop/hdfs-site.xml
+-rw-r--r-- 1 1001 1001 5.9K Dec  9 13:34 /etc/hadoop/hdfs-site.xml
+# vim /etc/hadoop/hdfs-site.xml
+sh: 20: vim: not found
+# hdfs dfs -setrep -c   w 2 task_2/TES   test_file_*
+Replication 2 set: task_2/test_file_1.txt
+Replication 2 set: task_2/test_file_2.txt
+Replication 2 set: task_2/test_file_3.txt
+Waiting for task_2/test_file_1.txt .............................................................................
+
+^C^C# 
+# hdfs dfs -ls -h task_2
+Found 3 items
+-rw-r--r--   2 root supergroup          7 2021-12-09 14:25 task_2/test_file_1.txt
+-rw-r--r--   2 root supergroup          5 2021-12-09 14:25 task_2/test_file_2.txt
+-rw-r--r--   2 root supergroup          2 2021-12-09 14:25 task_2/test_file_3.txt
+# apt install vim
+Reading package lists... 0%Reading package lists... 0%Reading package lists... 35%Reading package lists... Done
+Building dependency tree... 0%Building dependency tree... 0%Building dependency tree... 50%Building dependency tree... 50%Building dependency tree       
+Reading state information... 0%Reading state information... 0%Reading state information... Done
+E: Unable to locate package vim
+# ls
+KEYS  entrypoint.sh  home     media  root    srv	      test_file_3.txt
+bin   etc	     lib      mnt    run     sys	      tmp
+boot  hadoop	     lib64    opt    run.sh  test_file_1.txt  usr
+dev   hadoop-data    log.txt  proc   sbin    test_file_2.txt  var
+#   vim my_script.sh
+sh: 26: vim: not found
+# sudo apt install vim
+sh: 27: sudo: not found
+# apt install vi
+Reading package lists... 0%Reading package lists... 0%Reading package lists... 35%Reading package lists... Done
+Building dependency tree... 0%Building dependency tree... 0%Building dependency tree... 50%Building dependency tree... 50%Building dependency tree       
+Reading state information... 0%Reading state information... 0%Reading state information... Done
+E: Unable to locate package vi
+# hdfs dfs -rm -r -skipTrash task_2
+Deleted task_2
+# rm test_file_*
+# ls
+KEYS  dev	     hadoop	  lib	   media  proc	run.sh	sys  var
+bin   entrypoint.sh  hadoop-data  lib64    mnt	  root	sbin	tmp
+boot  etc	     home	  log.txt  opt	  run	srv	usr
+# cat log.txt
+Script started on Thu Dec  9 13:48:40 2021
+# ls /
+KEYS  dev	     hadoop	  lib	   media  proc	run.sh	sys  var
+bin   entrypoint.sh  hadoop-data  lib64    mnt	  root	sbin	tmp
+boot  etc	     home	  log.txt  opt	  run	srv	usr
+# hdfs dfs -mkdir -p /user/$USER
+# hdfs dfs -sl  ls
+# ^[[A^[[A^[[B^[[B^[[B                    ^[[A^[[B        echo "Hello," > test_file_1^C
+# ^[[A^[[A^[[B^[[B                ls
+KEYS  dev	     hadoop	  lib	   media  proc	run.sh	sys  var
+bin   entrypoint.sh  hadoop-data  lib64    mnt	  root	sbin	tmp
+boot  etc	     home	  log.txt  opt	  run	srv	usr
+# acho    echo "Hello," > test_file_1.txt
+# echo "hdfs" > test_file_2.txt
+# echi o "!" > test_file_3.txt
+# ls
+KEYS  entrypoint.sh  home     media  root    srv	      test_file_3.txt
+bin   etc	     lib      mnt    run     sys	      tmp
+boot  hadoop	     lib64    opt    run.sh  test_file_1.txt  usr
+dev   hadoop-data    log.txt  proc   sbin    test_file_2.txt  var
+# cat t	est	_file_1.txt
+Hello,
+# ^[[A^[[B        hdfs dfs -mkdir task_2
+# hs dfs dfs -ls
+Found 1 items
+drwxr-xr-x   - root supergroup          0 2021-12-09 14:03 task_2
+# рва    hdfs dfs -put / test_file_* t	   ask_2
+sh: 12: рhdfs: not found
+# hdfs dfs -put test_fele_* task_2
+put: `test_fele_*': No such file or directory
+# ^[[A    hdfs dfs -put test_file_* task_2
+2021-12-09 14:25:07,093 INFO sasl.SaslDataTransferClient: SASL encryption trust check: localHostTrusted = false, remoteHostTrusted = false
+2021-12-09 14:25:07,171 INFO sasl.SaslDataTransferClient: SASL encryption trust check: localHostTrusted = false, remoteHostTrusted = false
+2021-12-09 14:25:07,187 INFO sasl.SaslDataTransferClient: SASL encryption trust check: localHostTrusted = false, remoteHostTrusted = false
+# hdfs dfs -du task_2
+7  21  task_2/test_file_1.txt
+5  15  task_2/test_file_2.txt
+2  6   task_2/test_file_3.txt
+# hdfs dfs -ls -h task_2
+Found 3 items
+-rw-r--r--   3 root supergroup          7 2021-12-09 14:25 task_2/test_file_1.txt
+-rw-r--r--   3 root supergroup          5 2021-12-09 14:25 task_2/test_file_2.txt
+-rw-r--r--   3 root supergroup          2 2021-12-09 14:25 task_2/test_file_3.txt
+# ls -h /ect/hadoop/hdfs-site.xml
+ls: cannot access '/ect/hadoop/hdfs-site.xml': No such file or directory
+# ^[[A^[[B        ls    ls
+KEYS  entrypoint.sh  home     media  root    srv	      test_file_3.txt
+bin   etc	     lib      mnt    run     sys	      tmp
+boot  hadoop	     lib64    opt    run.sh  test_file_1.txt  usr
+dev   hadoop-data    log.txt  proc   sbin    test_file_2.txt  var
+# ls -    vi  ls -lh /etc/hadoop/hdfs-site.xml
+-rw-r--r-- 1 1001 1001 5.9K Dec  9 13:34 /etc/hadoop/hdfs-site.xml
+# vim /etc/hadoop/hdfs-site.xml
+sh: 20: vim: not found
+# hdfs dfs -setrep -c   w 2 task_2/TES   test_file_*
+Replication 2 set: task_2/test_file_1.txt
+Replication 2 set: task_2/test_file_2.txt
+Replication 2 set: task_2/test_file_3.txt
+Waiting for task_2/test_file_1.txt .............................................................................
+
+^C^C# 
+# hdfs dfs -ls -h task_2
+Found 3 items
+-rw-r--r--   2 root supergroup          7 2021-12-09 14:25 task_2/test_file_1.txt
+-rw-r--r--   2 root supergroup          5 2021-12-09 14:25 task_2/test_file_2.txt
+-rw-r--r--   2 root supergroup          2 2021-12-09 14:25 task_2/test_file_3.txt
+# apt install vim
+Reading package lists... 0%Reading package lists... 0%Reading package lists... 35%Reading package lists... Done
+Building dependency tree... 0%Building dependency tree... 0%Building dependency tree... 50%Building dependency tree... 50%Building dependency tree       
+Reading state information... 0%Reading state information... 0%Reading state information... Done
+E: Unable to locate package vim
+# ls
+KEYS  entrypoint.sh  home     media  root    srv	      test_file_3.txt
+bin   etc	     lib      mnt    run     sys	      tmp
+boot # exit
+
+Script done on Thu Dec  9 15:16:11 2021
+root@f560c11b9fde:/# cat log.txt ls
+Script started on Thu Dec  9 13:48:40 2021
+# ls /
+KEYS  dev	     hadoop	  lib	   media  proc	run.sh	sys  var
+bin   entrypoint.sh  hadoop-data  lib64    mnt	  root	sbin	tmp
+boot  etc	     home	  log.txt  opt	  run	srv	usr
+# hdfs dfs -mkdir -p /user/$USER
+# hdfs dfs -sl  ls
+# ^[[A^[[A^[[B^[[B^[[B                    ^[[A^[[B        echo "Hello," > test_file_1^C
+# ^[[A^[[A^[[B^[[B                ls
+KEYS  dev	     hadoop	  lib	   media  proc	run.sh	sys  var
+bin   entrypoint.sh  hadoop-data  lib64    mnt	  root	sbin	tmp
+boot  etc	     home	  log.txt  opt	  run	srv	usr
+# acho    echo "Hello," > test_file_1.txt
+# echo "hdfs" > test_file_2.txt
+# echi o "!" > test_file_3.txt
+# ls
+KEYS  entrypoint.sh  home     media  root    srv	      test_file_3.txt
+bin   etc	     lib      mnt    run     sys	      tmp
+boot  hadoop	     lib64    opt    run.sh  test_file_1.txt  usr
+dev   hadoop-data    log.txt  proc   sbin    test_file_2.txt  var
+# cat t	est	_file_1.txt
+Hello,
+# ^[[A^[[B        hdfs dfs -mkdir task_2
+# hs dfs dfs -ls
+Found 1 items
+drwxr-xr-x   - root supergroup          0 2021-12-09 14:03 task_2
+# рва    hdfs dfs -put / test_file_* t	   ask_2
+sh: 12: рhdfs: not found
+# hdfs dfs -put test_fele_* task_2
+put: `test_fele_*': No such file or directory
+# ^[[A    hdfs dfs -put test_file_* task_2
+2021-12-09 14:25:07,093 INFO sasl.SaslDataTransferClient: SASL encryption trust check: localHostTrusted = false, remoteHostTrusted = false
+2021-12-09 14:25:07,171 INFO sasl.SaslDataTransferClient: SASL encryption trust check: localHostTrusted = false, remoteHostTrusted = false
+2021-12-09 14:25:07,187 INFO sasl.SaslDataTransferClient: SASL encryption trust check: localHostTrusted = false, remoteHostTrusted = false
+# hdfs dfs -du task_2
+7  21  task_2/test_file_1.txt
+5  15  task_2/test_file_2.txt
+2  6   task_2/test_file_3.txt
+# hdfs dfs -ls -h task_2
+Found 3 items
+-rw-r--r--   3 root supergroup          7 2021-12-09 14:25 task_2/test_file_1.txt
+-rw-r--r--   3 root supergroup          5 2021-12-09 14:25 task_2/test_file_2.txt
+-rw-r--r--   3 root supergroup          2 2021-12-09 14:25 task_2/test_file_3.txt
+# ls -h /ect/hadoop/hdfs-site.xml
+ls: cannot access '/ect/hadoop/hdfs-site.xml': No such file or directory
+# ^[[A^[[B        ls    ls
+KEYS  entrypoint.sh  home     media  root    srv	      test_file_3.txt
+bin   etc	     lib      mnt    run     sys	      tmp
+boot  hadoop	     lib64    opt    run.sh  test_file_1.txt  usr
+dev   hadoop-data    log.txt  proc   sbin    test_file_2.txt  var
+# ls -    vi  ls -lh /etc/hadoop/hdfs-site.xml
+-rw-r--r-- 1 1001 1001 5.9K Dec  9 13:34 /etc/hadoop/hdfs-site.xml
+# vim /etc/hadoop/hdfs-site.xml
+sh: 20: vim: not found
+# hdfs dfs -setrep -c   w 2 task_2/TES   test_file_*
+Replication 2 set: task_2/test_file_1.txt
+Replication 2 set: task_2/test_file_2.txt
+Replication 2 set: task_2/test_file_3.txt
+Waiting for task_2/test_file_1.txt .............................................................................
+
+^C^C# 
+# hdfs dfs -ls -h task_2
+Found 3 items
+-rw-r--r--   2 root supergroup          7 2021-12-09 14:25 task_2/test_file_1.txt
+-rw-r--r--   2 root supergroup          5 2021-12-09 14:25 task_2/test_file_2.txt
+-rw-r--r--   2 root supergroup          2 2021-12-09 14:25 task_2/test_file_3.txt
+# apt install vim
+Reading package lists... 0%Reading package lists... 0%Reading package lists... 35%Reading package lists... Done
+Building dependency tree... 0%Building dependency tree... 0%Building dependency tree... 50%Building dependency tree... 50%Building dependency tree       
+Reading state information... 0%Reading state information... 0%Reading state information... Done
+E: Unable to locate package vim
+# ls
+KEYS  entrypoint.sh  home     media  root    srv	      test_file_3.txt
+bin   etc	     lib      mnt    run     sys	      tmp
+boot  hadoop	     lib64    opt    run.sh  test_file_1.txt  usr
+dev   hadoop-data    log.txt  proc   sbin    test_file_2.txt  var
+#   vim my_script.sh
+sh: 26: vim: not found
+# sudo apt install vim
+sh: 27: sudo: not found
+# apt install vi
+Reading package lists... 0%Reading package lists... 0%Reading package lists... 35%Reading package lists... Done
+Building dependency tree... 0%Building dependency tree... 0%Building dependency tree... 50%Building dependency tree... 50%Building dependency tree       
+Reading state information... 0%Reading state information... 0%Reading state information... Done
+E: Unable to locate package vi
+# hdfs dfs -rm -r -skipTrash task_2
+Deleted task_2
+# rm test_file_*
+# ls
+KEYS  dev	     hadoop	  lib	   media  proc	run.sh	sys  var
+bin   entrypoint.sh  hadoop-data  lib64    mnt	  root	sbin	tmp
+boot  etc	     home	  log.txt  opt	  run	srv	usr
+# cat log.txt
+Script started on Thu Dec  9 13:48:40 2021
+# ls /
+KEYS  dev	     hadoop	  lib	   media  proc	run.sh	sys  var
+bin   entrypoint.sh  hadoop-data  lib64    mnt	  root	sbin	tmp
+boot  etc	     home	  log.txt  opt	  run	srv	usr
+# hdfs dfs -mkdir -p /user/$USER
+# hdfs dfs -sl  ls
+# ^[[A^[[A^[[B^[[B^[[B                    ^[[A^[[B        echo "Hello," > test_file_1^C
+# ^[[A^[[A^[[B^[[B                ls
+KEYS  dev	     hadoop	  lib	   media  proc	run.sh	sys  var
+bin   entrypoint.sh  hadoop-data  lib64    mnt	  root	sbin	tmp
+boot  etc	     home	  log.txt  opt	  run	srv	usr
+# acho    echo "Hello," > test_file_1.txt
+# echo "hdfs" > test_file_2.txt
+# echi o "!" > test_file_3.txt
+# ls
+KEYS  entrypoint.sh  home     media  root    srv	      test_file_3.txt
+bin   etc	     lib      mnt    run     sys	      tmp
+boot  hadoop	     lib64    opt    run.sh  test_file_1.txt  usr
+dev   hadoop-data    log.txt  proc   sbin    test_file_2.txt  var
+# cat t	est	_file_1.txt
+Hello,
+# ^[[A^[[B        hdfs dfs -mkdir task_2
+# hs dfs dfs -ls
+Found 1 items
+drwxr-xr-x   - root supergroup          0 2021-12-09 14:03 task_2
+# рва    hdfs dfs -put / test_file_* t	   ask_2
+sh: 12: рhdfs: not found
+# hdfs dfs -put test_fele_* task_2
+put: `test_fele_*': No such file or directory
+# ^[[A    hdfs dfs -put test_file_* task_2
+2021-12-09 14:25:07,093 INFO sasl.SaslDataTransferClient: SASL encryption trust check: localHostTrusted = false, remoteHostTrusted = false
+2021-12-09 14:25:07,171 INFO sasl.SaslDataTransferClient: SASL encryption trust check: localHostTrusted = false, remoteHostTrusted = false
+2021-12-09 14:25:07,187 INFO sasl.SaslDataTransferClient: SASL encryption trust check: localHostTrusted = false, remoteHostTrusted = false
+# hdfs dfs -du task_2
+7  21  task_2/test_file_1.txt
+5  15  task_2/test_file_2.txt
+2  6   task_2/test_file_3.txt
+# hdfs dfs -ls -h task_2
+Found 3 items
+-rw-r--r--   3 root supergroup          7 2021-12-09 14:25 task_2/test_file_1.txt
+-rw-r--r--   3 root supergroup          5 2021-12-09 14:25 task_2/test_file_2.txt
+-rw-r--r--   3 root supergroup          2 2021-12-09 14:25 task_2/test_file_3.txt
+# ls -h /ect/hadoop/hdfs-site.xml
+ls: cannot access '/ect/hadoop/hdfs-site.xml': No such file or directory
+# ^[[A^[[B        ls    ls
+KEYS  entrypoint.sh  home     media  root    srv	      test_file_3.txt
+bin   etc	     lib      mnt    run     sys	      tmp
+boot  hadoop	     lib64    opt    run.sh  test_file_1.txt  usr
+dev   hadoop-data    log.txt  proc   sbin    test_file_2.txt  var
+# ls -    vi  ls -lh /etc/hadoop/hdfs-site.xml
+-rw-r--r-- 1 1001 1001 5.9K Dec  9 13:34 /etc/hadoop/hdfs-site.xml
+# vim /etc/hadoop/hdfs-site.xml
+sh: 20: vim: not found
+# hdfs dfs -setrep -c   w 2 task_2/TES   test_file_*
+Replication 2 set: task_2/test_file_1.txt
+Replication 2 set: task_2/test_file_2.txt
+Replication 2 set: task_2/test_file_3.txt
+Waiting for task_2/test_file_1.txt .............................................................................
+
+^C^C# 
+# hdfs dfs -ls -h task_2
+Found 3 items
+-rw-r--r--   2 root supergroup          7 2021-12-09 14:25 task_2/test_file_1.txt
+-rw-r--r--   2 root supergroup          5 2021-12-09 14:25 task_2/test_file_2.txt
+-rw-r--r--   2 root supergroup          2 2021-12-09 14:25 task_2/test_file_3.txt
+# apt install vim
+Reading package lists... 0%Reading package lists... 0%Reading package lists... 35%Reading package lists... Done
+Building dependency tree... 0%Building dependency tree... 0%Building dependency tree... 50%Building dependency tree... 50%Building dependency tree       
+Reading state information... 0%Reading state information... 0%Reading state information... Done
+E: Unable to locate package vim
+# ls
+KEYS  entrypoint.sh  home     media  root    srv	      test_file_3.txt
+bin   etc	     lib      mnt    run     sys	      tmp
+boot # exit
+
+Script done on Thu Dec  9 15:16:11 2021
+cat: ls: No such file or directory
+root@f560c11b9fde:/# ls
+KEYS  dev	     hadoop	  lib	   media  proc	run.sh	sys  var
+bin   entrypoint.sh  hadoop-data  lib64    mnt	  root	sbin	tmp
+boot  etc	     home	  log.txt  opt	  run	srv	usr
+root@f560c11b9fde:/# rm l
+lib/     lib64/   log.txt  
+root@f560c11b9fde:/# rm log.txt 
+root@f560c11b9fde:/# hdfs dfs -ls
+root@f560c11b9fde:/# hdfs dfs - ls   ls /
+Found 2 items
+drwxr-xr-x   - root supergroup          0 2021-12-03 04:52 /rmstate
+drwxr-xr-x   - root supergroup          0 2021-12-09 13:54 /user
+root@f560c11b9fde:/# hdfs dfs -ls /usr/  er
+Found 1 items
+drwxr-xr-x   - root supergroup          0 2021-12-09 15:09 /user/root
+root@f560c11b9fde:/# hdfs dfs -ls /user        mkdir task_2
+root@f560c11b9fde:/# hdfs fds -ls
+ERROR: fds is not COMMAND nor fully qualified CLASSNAME.
+Usage: hdfs [OPTIONS] SUBCOMMAND [SUBCOMMAND OPTIONS]
+
+  OPTIONS is none or any of:
+
+--buildpaths                       attempt to add class files from build tree
+--config dir                       Hadoop config directory
+--daemon (start|status|stop)       operate on a daemon
+--debug                            turn on shell script debug mode
+--help                             usage information
+--hostnames list[,of,host,names]   hosts to use in worker mode
+--hosts filename                   list of hosts to use in worker mode
+--loglevel level                   set the log4j level for this command
+--workers                          turn on worker mode
+
+  SUBCOMMAND is one of:
+
+
+    Admin Commands:
+
+cacheadmin           configure the HDFS cache
+crypto               configure HDFS encryption zones
+debug                run a Debug Admin to execute HDFS debug commands
+dfsadmin             run a DFS admin client
+dfsrouteradmin       manage Router-based federation
+ec                   run a HDFS ErasureCoding CLI
+fsck                 run a DFS filesystem checking utility
+haadmin              run a DFS HA admin client
+jmxget               get JMX exported values from NameNode or DataNode.
+oev                  apply the offline edits viewer to an edits file
+oiv                  apply the offline fsimage viewer to an fsimage
+oiv_legacy           apply the offline fsimage viewer to a legacy fsimage
+storagepolicies      list/get/set/satisfyStoragePolicy block storage policies
+
+    Client Commands:
+
+classpath            prints the class path needed to get the hadoop jar and
+                     the required libraries
+dfs                  run a filesystem command on the file system
+envvars              display computed Hadoop environment variables
+fetchdt              fetch a delegation token from the NameNode
+getconf              get config values from configuration
+groups               get the groups which users belong to
+lsSnapshottableDir   list all snapshottable dirs owned by the current user
+snapshotDiff         diff two snapshots of a directory or diff the current
+                     directory contents with a snapshot
+version              print the version
+
+    Daemon Commands:
+
+balancer             run a cluster balancing utility
+datanode             run a DFS datanode
+dfsrouter            run the DFS router
+diskbalancer         Distributes data evenly among disks on a given node
+httpfs               run HttpFS server, the HDFS HTTP Gateway
+journalnode          run the DFS journalnode
+mover                run a utility to move block replicas across storage types
+namenode             run the DFS namenode
+nfs3                 run an NFS version 3 gateway
+portmap              run a portmap service
+secondarynamenode    run the DFS secondary namenode
+sps                  run external storagepolicysatisfier
+zkfc                 run the ZK Failover Controller daemon
+
+SUBCOMMAND may print help when invoked w/o parameters or with -h.
+root@f560c11b9fde:/# hdfs fds -ls[1P[1P[1P[1@d[1@f[1@s
+Found 1 items
+drwxr-xr-x   - root supergroup          0 2021-12-09 15:19 task_2
+root@f560c11b9fde:/# echo $(date +"%Y-%m-%d"                       echo "Hello," > test_file_1.txt
+root@f560c11b9fde:/# echo "hdfs" > test_file_2.txt
+root@f560c11b9fde:/# echo "!" > test_file_3.txt
+root@f560c11b9fde:/# ls
+KEYS  entrypoint.sh  home   mnt   run	  sys		   tmp
+bin   etc	     lib    opt   run.sh  test_file_1.txt  usr
+boot  hadoop	     lib64  proc  sbin	  test_file_2.txt  var
+dev   hadoop-data    media  root  srv	  test_file_3.txt
+root@f560c11b9fde:/# h dfs dfs -put test_file_* task_2[1@h
+2021-12-09 15:21:21,767 INFO sasl.SaslDataTransferClient: SASL encryption trust check: localHostTrusted = false, remoteHostTrusted = false
+2021-12-09 15:21:21,842 INFO sasl.SaslDataTransferClient: SASL encryption trust check: localHostTrusted = false, remoteHostTrusted = false
+2021-12-09 15:21:21,856 INFO sasl.SaslDataTransferClient: SASL encryption trust check: localHostTrusted = false, remoteHostTrusted = false
+root@f560c11b9fde:/# ls  hdfs dfs -put test_file_* task_2root@f560c11b9fde:/# ls[Kecho "!" > test_file_3.txt[3@hdfs" > test_file_2.txt[2@Hello," > test_file_1.txtroot@f560c11b9fde:/# [19Phdfs dfs -ls task_2
+Found 3 items
+-rw-r--r--   3 root supergroup          7 2021-12-09 15:21 task_2/test_file_1.txt
+-rw-r--r--   3 root supergroup          5 2021-12-09 15:21 task_2/test_file_2.txt
+-rw-r--r--   3 root supergroup          2 2021-12-09 15:21 task_2/test_file_3.txt
+root@f560c11b9fde:/# dfs dfs -put test_file_* task_2root@f560c11b9fde:/# [12Phdfs dfs -ls task_2[12@dfs dfs -put test_file_* task_2                               hdfs dfs -setrep 2 task_2/test_file_*
+Replication 2 set: task_2/test_file_1.txt
+Replication 2 set: task_2/test_file_2.txt
+Replication 2 set: task_2/test_file_3.txt
+root@f560c11b9fde:/# cat   hdfs - dfs -cat task_2/test_file_* 1 [1@ [24@echo $(date +"%Y-%m-%d") `hdfs dfs -cat task_2/test_file_1  [Aoot@f560c11b9fde:/# echo $(date +"%Y-%m-%d") `hdfs dfs -cat task_2/test_file_1
+[Aroot@f560c11b9fde:/# echo $(date +"%Y-%m-%d") `hdfs dfs -cat task_2/test_file_1`  [Aroot@f560c11b9fde:/# echo $(date +"%Y-%m-%d") `hdfs dfs -cat task_2/test_file_1
+  >   l o g . t x t 
+cat: `task_2/test_file_1': No such file or directory
+root@f560c11b9fde:/# echo $(date +"%Y-%m-%d") `hdfs dfs -cat task_2/test_file_1`  > log.txt [Aroot@f560c11b9fde:/# echo $(date +"%Y-%m-%d") `hdfs dfs -cat task_2/test_file_1/test_file_1` >[1P[Aoot@f560c11b9fde:/# echo $(date +"%Y-%m-%d") `hdfs dfs -cat task_2test_file_1` > [1P[Aoot@f560c11b9fde:/# echo $(date +"%Y-%m-%d") `hdfs dfs -cat task_test_file_1` > l[1P[Aoot@f560c11b9fde:/# echo $(date +"%Y-%m-%d") `hdfs dfs -cat tasktest_file_1` > lo[1P[Aoot@f560c11b9fde:/# echo $(date +"%Y-%m-%d") `hdfs dfs -cat tastest_file_1` > log[1P[Aoot@f560c11b9fde:/# echo $(date +"%Y-%m-%d") `hdfs dfs -cat tatest_file_1` > log.[1P[Aoot@f560c11b9fde:/# echo $(date +"%Y-%m-%d") `hdfs dfs -cat test_file_1` > log.t[1P[Aoot@f560c11b9fde:/# echo $(date +"%Y-%m-%d") `hdfs dfs -cat 
+
+cat: `test_file_1': No such file or directory
+root@f560c11b9fde:/# echo $(date +"%Y-%m-%d") `hdfs dfs -cat test_file_1` > log.ttxt [Aroot@f560c11b9fde:/# echo $(date +"%Y-%m-%d") `hdfs dfs -cat test_file_1` > log_1`.` > log.[1@t[Aot@f560c11b9fde:/# echo $(date +"%Y-%m-%d") `hdfs dfs -cat test_file_1.t` > log[1@.[Aot@f560c11b9fde:/# echo $(date +"%Y-%m-%d") `hdfs dfs -cat test_file_1.tx` > lo[1@g[Aot@f560c11b9fde:/# echo $(date +"%Y-%m-%d") `hdfs dfs -cat test_file_1.txt` > l[1@o[Aot@f560c11b9fde:/# echo $(date +"%Y-%m-%d") `hdfs dfs -cat test_file_1.txt
+
+cat: `test_file_1.txt': No such file or directory
+root@f560c11b9fde:/# ls
+KEYS  entrypoint.sh  home     media  root    srv	      test_file_3.txt
+bin   etc	     lib      mnt    run     sys	      tmp
+boot  hadoop	     lib64    opt    run.sh  test_file_1.txt  usr
+dev   hadoop-data    log.txt  proc   sbin    test_file_2.txt  var
+root@f560c11b9fde:/# cat log.txt
+2021-12-09
+root@f560c11b9fde:/# cat log.txtls[Kecho $(date +"%Y-%m-%d") `hdfs dfs -cat test_file_1.txt` > llog.txt [Aroot@f560c11b9fde:/# echo $(date +"%Y-%m-%d") `hdfs dfs -cat test_file_1.txt` >hdfs dfs -cat test_file_1.txt` > lo[1P[Aoot@f560c11b9fde:/# echo $(date +"%Y-%m-%d") hdfs dfs -cat test_file_1.txt` > log[1P[Aoot@f560c11b9fde:/# echo $(date +"%Y-%m-%d") hdfs dfs -cat test_file_1.txt
+
+root@f560c11b9fde:/# cat log.txt
+2021-12-09 hdfs dfs -cat test_file_1.txt
+root@f560c11b9fde:/# hdfs dfs -cat test_file_1.txt
+cat: `test_file_1.txt': No such file or directory
+root@f560c11b9fde:/# hdfs dfs -cat test_file_1.txt t[1@t[1@a[1@s[1@k[1@_[1@2[1@/
+2021-12-09 15:28:49,772 INFO sasl.SaslDataTransferClient: SASL encryption trust check: localHostTrusted = false, remoteHostTrusted = false
+Hello,
+root@f560c11b9fde:/# <pre><font color="#D3D7CF">echo $(date +&quot;%Y-%m-%d&quot;;) hdfs dfs -cat test_file_1.txt &gt; log.txt</font></pre>                                                          [Aroot@f560c11b9fde:/# <pre><font color="#D3D7CF">echo $(date +&quot;%Y-%m-%d&quot [K[Aroot@f560c11b9fde:/# <pre><font color="#D3D7CF">echo $(date +&quot;%Y-%m-%d&quo[K
+[K[Aroot@f560c11b9fde:/# <pre><font color="#D3D7CF">echo $(date +&quot;%Y-%m-%d&quo                                                          echo $(date + "%Y-%m-%d") `hdfs dfs -cat task_2/test_file_1 .txt > log.txt
+> ^C
+root@f560c11b9fde:/# echo $(date + "%Y-%m-%d") `hdfs dfs -cat task_2/test_file_1..txt > log.txt[1@`
+date: extra operand '%Y-%m-%d'
+Try 'date --help' for more information.
+2021-12-09 15:30:52,794 INFO sasl.SaslDataTransferClient: SASL encryption trust check: localHostTrusted = false, remoteHostTrusted = false
+root@f560c11b9fde:/# cat log.txt
+Hello,
+root@f560c11b9fde:/# echo $(date +"%Y-%m-%d") `hdfs dfs -cat task_2/test_file_1. txt` > log.txt
+2021-12-09 15:32:16,764 INFO sasl.SaslDataTransferClient: SASL encryption trust check: localHostTrusted = false, remoteHostTrusted = false
+root@f560c11b9fde:/# cat log.txt
+2021-12-09 Hello,
+root@f560c11b9fde:/# echo $(date +"%Y-%m-%d") `hdfs dfs -cat task_2/test_file_1.ttxt` > log.txt
+2021-12-09 15:34:00,909 INFO sasl.SaslDataTransferClient: SASL encryption trust check: localHostTrusted = false, remoteHostTrusted = false
+root@f560c11b9fde:/# cat log.txt
+2021-12-09 Hello,
+root@f560c11b9fde:/# echo $(date +"%Y-%m-%d") `hdfs dfs -cat task_2/test_file_2.ttxt` >> log.txt
+2021-12-09 15:34:30,906 INFO sasl.SaslDataTransferClient: SASL encryption trust check: localHostTrusted = false, remoteHostTrusted = false
+root@f560c11b9fde:/# cat log.txt
+2021-12-09 Hello,
+2021-12-09 hdfs
+root@f560c11b9fde:/# rm log.txt
+root@f560c11b9fde:/# ls
+KEYS  entrypoint.sh  home   mnt   run	  sys		   tmp
+bin   etc	     lib    opt   run.sh  test_file_1.txt  usr
+boot  hadoop	     lib64  proc  sbin	  test_file_2.txt  var
+dev   hadoop-data    media  root  srv	  test_file_3.txt
+root@f560c11b9fde:/# ls h
+hadoop/      hadoop-data/ home/        
+root@f560c11b9fde:/# ls home/
+root@f560c11b9fde:/# ls
+KEYS	       etc	      lib    proc    srv	      tmp
+bin	       hadoop	      lib64  root    sys	      usr
+boot	       hadoop-data    media  run     test_file_1.txt  var
+dev	       home	      mnt    run.sh  test_file_2.txt
+entrypoint.sh  hw_lesson2.sh  opt    sbin    test_file_3.txt
+root@f560c11b9fde:/# ls -lh hw_lesson2.sh 
+-rw-rw-r-- 1 1000 1000 513 Dec  9 15:37 hw_lesson2.sh
+root@f560c11b9fde:/# chmod +x hw_lesson2.sh 
+root@f560c11b9fde:/# chmod +x hw_lesson2.sh root@f560c11b9fde:/# [2Pls -lh hw_lesson2.sh 
+-rwxrwxr-x 1 1000 1000 513 Dec  9 15:37 hw_lesson2.sh
+root@f560c11b9fde:/# clear
+[3J[H[2Jroot@f560c11b9fde:/# ./hw_lesson2.sh [Kroot@f560c11b9fde:/# ./hw_lesson2.sh [Kroot@f560c11b9fde:/# ./hw_lesson2.sh 
+mkdir: `task_2': File exists
+put: `task_2/test_file_1.txt': File exists
+put: `task_2/test_file_2.txt': File exists
+put: `task_2/test_file_3.txt': File exists
+7  14  task_2/test_file_1.txt
+5  10  task_2/test_file_2.txt
+2  4   task_2/test_file_3.txt
+Replication 2 set: task_2/test_file_1.txt
+Replication 2 set: task_2/test_file_2.txt
+Replication 2 set: task_2/test_file_3.txt
+Found 3 items
+-rw-r--r--   2 root supergroup          7 2021-12-09 15:21 task_2/test_file_1.txt
+-rw-r--r--   2 root supergroup          5 2021-12-09 15:21 task_2/test_file_2.txt
+-rw-r--r--   2 root supergroup          2 2021-12-09 15:21 task_2/test_file_3.txt
+2021-12-09 15:45:58,993 INFO sasl.SaslDataTransferClient: SASL encryption trust check: localHostTrusted = false, remoteHostTrusted = false
+2021-12-09 15:46:00,516 INFO sasl.SaslDataTransferClient: SASL encryption trust check: localHostTrusted = false, remoteHostTrusted = false
+./hw_lesson2.sh: line 13: syntax error near unexpected token `>'
+./hw_lesson2.sh: line 13: `echo $(date +"%Y-%m-%d") `hdfs dfs -cat task_2/test_file_3.txt` >>> log.txt'
+root@f560c11b9fde:/# cat log.txt 
+2021-12-09 Hello,
+2021-12-09 hdfs
+root@f560c11b9fde:/# exit
+exit
+]0;vitaly@vitaly-MS-7C37: ~/Документы/GB/docker-hadoop-master[01;32mvitaly@vitaly-MS-7C37[00m:[01;34m~/Документы/GB/docker-hadoop-master[00m$ [0;33m[0;37mexit
+exit
+
+Script done on 2021-12-09 23:50:13+08:00 [COMMAND_EXIT_CODE="0"]
